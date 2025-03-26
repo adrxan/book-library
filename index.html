@@ -1,11 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+        <script src="index.js"></script>
+        <title>My Library</title>
     </head>
     <body>
-        
+        <div class="page-wrapper">
+            <div class="page-header">
+                <h1>My Library</h1>
+            </div>
+            <div class="library-grid">
+                <div class="book-frame">
+                    <div class="book-cover-frame">
+                        <div class="book-cover">
+                            <h3 class="book-cover-title">Book Title Here</h3>
+                        </div>
+                        <div class="page-count">
+                            <p class="page-amount">228 pp.</p>
+                        </div>
+                        <div class="book-info">
+                            <div class="book-info-name">
+                                <h3 class="book-title">Book Title</h3>
+                                <h6 class="book-author">by Book Auther</h6>
+                            </div>
+                            <div class="book-read-status">
+                                <p class="book-read">Unread</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-menu">
+                <p class="book-count">22 Books</p>
+                <button id="add-btn">Add Book</button>
+            </div>
+        </div>
     </body>
 </html>
