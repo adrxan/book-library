@@ -3,16 +3,22 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+            rel="stylesheet"
+        />
         <link rel="stylesheet" href="styles.css" />
         <script src="index.js"></script>
         <title>My Library</title>
     </head>
     <body>
         <div class="page-wrapper">
-            <div class="page-header">
-                <h1>My Library</h1>
-            </div>
-            <div class="library-grid">
+            <header class="page-header">
+                <h1 class="page-title">My Library</h1>
+            </header>
+            <main class="library-grid">
                 <div class="book-frame">
                     <div class="book-cover-frame">
                         <div class="book-cover">
@@ -21,18 +27,18 @@
                         <div class="page-count">
                             <p class="page-amount">228 pp.</p>
                         </div>
-                        <div class="book-info">
-                            <div class="book-info-name">
-                                <h3 class="book-title">Book Title</h3>
-                                <h6 class="book-author">by Book Auther</h6>
-                            </div>
-                            <div class="book-read-status">
-                                <p class="book-read">Unread</p>
-                            </div>
+                    </div>
+                    <div class="book-info">
+                        <div class="book-info-name">
+                            <h3 class="book-title">Book Title</h3>
+                            <h5 class="book-author">by Book Auther</h5>
+                        </div>
+                        <div class="book-read-status">
+                            <p class="book-read">Unread</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
             <div class="footer-menu">
                 <p class="book-count">22 Books</p>
                 <button id="add-btn">Add Book</button>
