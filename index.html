@@ -10,7 +10,6 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="styles.css" />
-        <script src="index.js"></script>
         <title>My Library</title>
     </head>
     <body>
@@ -47,12 +46,12 @@
                 <p class="book-count">0 Unread, 4 Total</p>
                 <button id="add-btn">Add Book</button>
             </div>
-
             <dialog id="book-dialog">
                 <div class="dialog-cover-frame">
-                    <div class="book-cover">
+                    <div class="book-cover" id="dialog-cover">
                         <h3
                             class="book-cover-title instrument-serif-regular"
+                            id="dialog-cover-title"
                         ></h3>
                     </div>
                 </div>
@@ -88,79 +87,79 @@
                         <p class="form-label">Color</p>
                         <label
                             class="color-box"
-                            style="background-color: #d3d4cd"
+                            style="background-color: var(--cover-white)"
                         >
                             <input
                                 type="radio"
                                 name="selected_color"
-                                value="d3d4cd"
+                                value="var(--cover-white)"
                                 checked
                             />
                             <span class="checkmark"></span>
                         </label>
                         <label
                             class="color-box"
-                            style="background-color: #757780"
+                            style="background-color: var(--cover-grey)"
                         >
                             <input
                                 type="radio"
                                 name="selected_color"
-                                value="757780"
+                                value="var(--cover-grey)"
                             />
                             <span class="checkmark"></span>
                         </label>
                         <label
                             class="color-box"
-                            style="background-color: #c24020"
+                            style="background-color: var(--cover-orange)"
                         >
                             <input
                                 type="radio"
                                 name="selected_color"
-                                value="c24020"
+                                value="var(--cover-orange)"
                             />
                             <span class="checkmark"></span>
                         </label>
                         <label
                             class="color-box"
-                            style="background-color: #ed9b28"
+                            style="background-color: var(--cover-yellow)"
                         >
                             <input
                                 type="radio"
                                 name="selected_color"
-                                value="ed9b28"
+                                value="var(--cover-yellow)"
                             />
                             <span class="checkmark"></span>
                         </label>
                         <label
                             class="color-box"
-                            style="background-color: #687735"
+                            style="background-color: var(--cover-green)"
                         >
                             <input
                                 type="radio"
                                 name="selected_color"
-                                value="687735"
+                                value="var(--cover-green)"
                             />
                             <span class="checkmark"></span>
                         </label>
                         <label
                             class="color-box"
-                            style="background-color: #224ca0"
+                            style="background-color: var(--cover-blue)"
                         >
                             <input
                                 type="radio"
                                 name="selected_color"
-                                value="224ca0"
+                                value="var(--cover-blue)"
                             />
                             <span class="checkmark"></span>
                         </label>
                         <label
                             class="color-box"
-                            style="background-color: #cb9895"
+                            style="background-color: var(--cover-pink)"
                         >
                             <input
                                 type="radio"
                                 name="selected_color"
-                                value="cb9895"
+                                value="var(--cover-pink)"
                             />
                             <span class="checkmark"></span>
                         </label>
@@ -178,5 +177,6 @@
                 </form>
             </dialog>
         </div>
+        <script src="index.js"></script>
     </body>
 </html>
