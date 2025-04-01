@@ -41,6 +41,7 @@ dialog.addEventListener("close", () => {
   document.getElementById("dialog-cover-title").textContent = "";
   document.getElementById("dialog-cover").style.backgroundColor =
     `var(--cover-white)`;
+  countBooks();
 });
 
 const myLibrary = [
@@ -71,6 +72,7 @@ const myLibrary = [
 ];
 
 displayBooks();
+countBooks();
 
 function Book(title, author, pages, read, selectedColor) {
   this.id = crypto.randomUUID();
@@ -135,4 +137,11 @@ function addBookToLibrary() {
   const book = new Book(title, author, pages, read, selectedColor);
   myLibrary.push(book);
   displayBooks();
+}
+
+function countBooks() {
+  const unreadCount = myLibrary.filter((book) => book.read === false).length;
+  const totalCount = myLibrary.length;
+  document.getElementById("book-count").innerHTML =
+    `${unreadCount} Unread, ${totalCount} Total`;
 }
