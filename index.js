@@ -1,6 +1,6 @@
 const dialog = document.getElementById("book-dialog");
 const form = document.getElementById("book-form");
-const openBtn = document.getElementById("add-btn");
+const addBtn = document.getElementById("add-btn");
 const closeBtn = document.getElementById("cancel-btn");
 
 const bookId = document.getElementById("book-id");
@@ -21,7 +21,7 @@ bookColor.forEach((radio) => {
   });
 });
 
-openBtn.addEventListener("click", () => {
+addBtn.addEventListener("click", () => {
   dialog.showModal();
 });
 
@@ -51,7 +51,7 @@ const myLibrary = [
     author: "Franz Kafka",
     pages: 70,
     read: true,
-    selectedColor: "var(--cover-white)",
+    selectedColor: "var(--cover-blue)",
   },
   {
     id: "d77326b5-b997-4c73-84c7-dee40ef7a3b0",
@@ -59,7 +59,7 @@ const myLibrary = [
     author: "Hanya Yanagihara",
     pages: 832,
     read: false,
-    selectedColor: "var(--cover-blue)",
+    selectedColor: "var(--cover-green)",
   },
   {
     id: "d9da8853-754d-41c6-b441-e3df7956df19",
@@ -67,7 +67,7 @@ const myLibrary = [
     author: "Haruki Murakami",
     pages: 480,
     read: true,
-    selectedColor: "var(--cover-orange)",
+    selectedColor: "var(--cover-grey)",
   },
 ];
 
@@ -84,15 +84,19 @@ function Book(title, author, pages, read, selectedColor) {
 }
 
 function displayBooks() {
+  const isEditing = document
+    .getElementById("edit-btn")
+    .classList.contains("active-state");
+
   const bookLibrary = document.getElementById("library-grid");
   bookLibrary.innerHTML = "";
   let lastAddedBook;
   for (let i = 0; i < myLibrary.length; i++) {
-    console.log(myLibrary[i]);
     const book = myLibrary[i];
     const bookItem = document.createElement("div");
     bookItem.innerHTML = `
-      <div class="book book-frame">
+      <div class="book book-frame" data-book-id="${book.id}">
+          <p class="delete-btn">Delete</p>
           <div class="book-cover-frame">
               <div class="book-cover" style="background-color: ${book.selectedColor}">
                   <h3
@@ -111,7 +115,7 @@ function displayBooks() {
                   <h5 class="book-author">by ${book.author}</h5>
               </div>
               <div class="book-read-status">
-                  <p class="book-read">${book.read ? "Read" : "Unread"}</p>
+                  <p class="book-read">${book.read ? "Finished" : "Unread"}</p>
               </div>
           </div>
       </div>`;
@@ -123,6 +127,10 @@ function displayBooks() {
   }
   if (lastAddedBook) {
     lastAddedBook.scrollIntoView({ behavior: "smooth" });
+  }
+
+  if (isEditing) {
+    setEditMode(true);
   }
 }
 
@@ -136,6 +144,9 @@ function addBookToLibrary() {
   ).value;
   const book = new Book(title, author, pages, read, selectedColor);
   myLibrary.push(book);
+  if (myLibrary.length > 0) {
+    editButton.classList.remove("inactive-state");
+  }
   displayBooks();
 }
 
@@ -144,4 +155,63 @@ function countBooks() {
   const totalCount = myLibrary.length;
   document.getElementById("book-count").innerHTML =
     `${unreadCount} Unread, ${totalCount} Total`;
+}
+
+const editButton = document.getElementById("edit-btn");
+const bookLibrary = document.getElementById("library-grid");
+
+function setEditMode(isEditing) {
+  const books = document.querySelectorAll(".book");
+
+  books.forEach((book) => {
+    book
+      .querySelector(".book-read-status")
+      ?.classList.toggle("active-state", isEditing);
+    book.querySelector(".delete-btn")?.classList.toggle("visible", isEditing);
+  });
+
+  editButton.textContent = isEditing ? "Done" : "Edit";
+  editButton.classList.toggle("active-state", isEditing);
+  addBtn.classList.toggle("inactive-state", isEditing);
+}
+
+editButton.addEventListener("click", () => {
+  const isEditing = !editButton.classList.contains("active-state");
+  setEditMode(isEditing);
+});
+
+bookLibrary.addEventListener("click", (e) => {
+  if (!editButton.classList.contains("active-state")) return;
+
+  const bookElement = e.target.closest(".book");
+  if (!bookElement) return;
+
+  const bookId = bookElement.dataset.bookId;
+
+  if (e.target.closest(".book-read-status")) {
+    const book = myLibrary.find((b) => b.id === bookId);
+    if (book) {
+      book.read = !book.read;
+      updateUI();
+    }
+    return;
+  }
+
+  if (e.target.classList.contains("delete-btn")) {
+    const bookIndex = myLibrary.findIndex((b) => b.id === bookId);
+    if (bookIndex === -1) return;
+
+    myLibrary.splice(bookIndex, 1);
+    updateUI();
+
+    if (myLibrary.length === 0) {
+      setEditMode(false);
+      editButton.classList.add("inactive-state");
+    }
+  }
+});
+
+function updateUI() {
+  displayBooks();
+  countBooks();
 }
