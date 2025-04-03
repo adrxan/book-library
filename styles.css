@@ -1,7 +1,7 @@
 :root {
     --cover-white: #d3d4cd;
-    --cover-grey: #757780;
-    --cover-orange: #c24020;
+    --cover-grey: #878787;
+    --cover-orange: #ca483f;
     --cover-yellow: #ed9b28;
     --cover-green: #687735;
     --cover-blue: #224ca0;
@@ -80,16 +80,36 @@ h6 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     width: 1040px;
-    margin-bottom: 16px;
+    gap: 0;
 }
 
 .book-frame {
+    position: relative;
     height: 480px;
-    border: 1px solid #6d6d6d75;
+    outline: 1px solid #6d6d6d75;
     padding: 24px 32px 32px 32px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.delete-btn {
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    color: #ff9999;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.visible {
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .book-cover-frame {
@@ -155,25 +175,25 @@ h6 {
 .footer-menu {
     position: sticky;
     bottom: 0;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 150px 1fr 150px;
+    /* justify-content: space-between; */
     align-items: center;
     width: 1040px;
-    padding: 8px 32px;
+    padding: 8px 24px;
     background: rgba(9, 9, 9, 0.75);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    outline: 1px solid #6d6d6d75;
 }
 
-#add-btn,
-.button-group > button {
+button {
     background-color: #fafafa;
     border-radius: 4px;
     padding: 4px 16px;
     border: none;
     cursor: pointer;
-    margin-top: -4px;
     font-weight: 500;
     font-size: 12px;
 }
@@ -181,6 +201,42 @@ h6 {
 button:hover {
     background-color: #a1a1aa !important;
     transition: background-color ease-in-out 0.1s;
+}
+
+#edit-btn {
+    justify-self: start;
+    background-color: transparent;
+    color: #a1a1aa;
+    border: 1px solid #a1a1aa75;
+}
+
+#edit-btn:hover {
+    background-color: #fafafa !important;
+    color: #010101;
+}
+
+.active-state {
+    background-color: #fafafa !important;
+    color: #000000 !important;
+    cursor: pointer;
+}
+
+.inactive-state {
+    pointer-events: none;
+    opacity: 0.2;
+}
+
+#book-count {
+    text-align: center;
+    justify-self: center;
+}
+
+#add-btn {
+    justify-self: end;
+}
+
+.book-read-status.active-state:hover {
+    background-color: #2a2a2a;
 }
 
 dialog {
@@ -197,9 +253,9 @@ dialog {
     align-items: center;
     transform: translateY(20px);
     transition:
-        opacity 0.3s ease-in-out,
-        visibility 0.3s ease-in-out,
-        transform 0.1s ease-in-out;
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease;
     margin: 0 auto;
     border: none;
     outline: none;
@@ -215,11 +271,19 @@ dialog[open] {
 dialog::backdrop {
     background-color: #fafafa;
     background: rgba(9, 9, 9, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transition:
+        backdrop-filter 1s ease,
+        -webkit-backdrop-filter 1s ease;
     position: fixed;
     inset: 0;
     margin: 0 auto;
+}
+
+dialog[open]::backdrop {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
 }
 
 .dialog-cover-frame {
@@ -229,6 +293,7 @@ dialog::backdrop {
     display: flex;
     align-items: center;
     justify-content: center;
+    outline: 1px solid #6d6d6d75;
 }
 
 #book-form {
@@ -240,6 +305,7 @@ dialog::backdrop {
     flex-direction: column;
     padding: 0 80px;
     gap: 32px;
+    outline: 1px solid #6d6d6d75;
 }
 
 .form-field {
