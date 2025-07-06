@@ -74,13 +74,15 @@ const myLibrary = [
 displayBooks();
 countBooks();
 
-function Book(title, author, pages, read, selectedColor) {
-  this.id = crypto.randomUUID();
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.selectedColor = selectedColor;
+class Book {
+  constructor(title, author, pages, read, selectedColor) {
+    this.id = crypto.randomUUID();
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.selectedColor = selectedColor;
+  }
 }
 
 function displayBooks() {
