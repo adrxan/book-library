@@ -414,6 +414,11 @@ input#read:checked {
     gap: 16px;
 }
 
+#error-msg {
+    color: red;
+    margin-right: auto;
+}
+
 #cancel-btn,
 #color-btn:hover {
     background-color: transparent !important;
