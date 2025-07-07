@@ -4,10 +4,10 @@ const addBtn = document.getElementById("add-btn");
 const closeBtn = document.getElementById("cancel-btn");
 
 const bookId = document.getElementById("book-id");
-const title = document.getElementById("title").value;
+const title = document.getElementById("title");
 let dialogTitle = document.getElementById("title");
-const author = document.getElementById("author").value;
-const pages = document.getElementById("pages").value;
+const author = document.getElementById("author");
+const pages = document.getElementById("pages");
 const read = document.getElementById("read").checked;
 const bookColor = document.querySelectorAll('input[name="selected_color"]');
 
@@ -29,11 +29,32 @@ closeBtn.addEventListener("click", () => {
   dialog.close();
 });
 
+const errorMsg = document.getElementById("error-msg");
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  addBookToLibrary();
-  form.reset();
-  dialog.close();
+
+  const inputsToValidate = [title, author, pages];
+
+  let formIsValid = true;
+  for (const input of inputsToValidate) {
+    if (input.validity.valueMissing) {
+      errorMsg.textContent = "Must fill in fields";
+
+      if (formIsValid) {
+        input.focus();
+      }
+      formIsValid = false;
+    } else {
+      errorMsg.textContent = "";
+    }
+  }
+
+  if (formIsValid) {
+    addBookToLibrary();
+    form.reset();
+    dialog.close();
+  }
 });
 
 dialog.addEventListener("close", () => {
@@ -41,6 +62,7 @@ dialog.addEventListener("close", () => {
   document.getElementById("dialog-cover-title").textContent = "";
   document.getElementById("dialog-cover").style.backgroundColor =
     `var(--cover-white)`;
+  errorMsg.textContent = "";
   countBooks();
 });
 
