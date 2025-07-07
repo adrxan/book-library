@@ -33,7 +33,7 @@
                         ></h3>
                     </div>
                 </div>
-                <form id="book-form">
+                <form id="book-form" novalidate>
                     <h2 id="dialog-title">Add Book</h2>
                     <input type="hidden" id="book-id" />
                     <div class="form-field">
@@ -143,6 +143,7 @@
                         </label>
                     </div>
                     <div class="button-group">
+                        <span id="error-msg"></span>
                         <button type="button" id="cancel-btn">Cancel</button>
                         <button type="submit" id="submit-btn">Submit</button>
                     </div>
